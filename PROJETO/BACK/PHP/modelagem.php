@@ -32,6 +32,44 @@
             }
         }
 
+        function editar(){
+            $banco = new Banco();
+            $conn = $banco->conectar();
+            try{
+                $stmt = $conn->prepare("update modelagem set tipo_molde=:tipo_molde, codigo_molde=:codigo_molde, tamanho=:tamanho 
+                where id_modelagem=:id_modelagem");
+
+                $stmt->bindParam(':tipo_molde',$this->tipo_molde);
+                $stmt->bindParam(':codigo_molde',$this->codigo_molde);
+                $stmt->bindParam(':tamanho',$this->tamanho);
+
+                $stmt->bindParam(':id_modelagem', $this->id_modelagem);
+
+
+            //  $stmt->bindParam(':modelagem',$this->modelagem);
+               // $stmt->execute();
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
+            
+            $banco->fecharConexao();
+            return $stmt->execute();
+        }
+
+
+        function excluir(){
+            $banco = new Banco();
+            $conn = $banco->conectar();
+            try{
+                $stmt = $conn->prepare("delete from modelagem where id_modelagem = :id_modelagem");
+                $stmt->bindParam(':id_modelagem',$this->id_modelagem);
+                $stmt->execute();
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
+            $banco->fecharConexao();
+        }
+
         function getIdModelagem(){
             return $this->id_modelagem;
         }

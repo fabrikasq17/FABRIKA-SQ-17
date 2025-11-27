@@ -42,6 +42,54 @@
             }
         }
 
+        function editar(){
+            $banco = new Banco();
+            $conn = $banco->conectar();
+            try{
+                $stmt = $conn->prepare("update aviamento set nome=:nome, cor=:cor, peso_quantidade=:peso_quantidade, 
+                composicao=:composicao, tamanho=:tamanho where id_aviamento=:id_aviamento");
+
+                $stmt->bindParam(':nome',$this->nome);
+                $stmt->bindParam(':cor',$this->cor);
+                $stmt->bindParam(':peso_quantidade',$this->peso_quantidade);
+                $stmt->bindParam(':composicao',$this->composicao);
+                $stmt->bindParam(':tamanho',$this->tamanho);
+
+                $stmt->bindParam(':id_aviamento', $this->id_aviamento);
+
+
+            //  $stmt->bindParam(':aviamento',$this->aviamento);
+               // $stmt->execute();
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
+            
+            return $stmt->execute();
+            $banco->fecharConexao();
+        }
+
+
+        function excluir(){
+        $banco = new Banco();
+        $conn = $banco->conectar();
+
+        try{
+            $stmt = $conn->prepare("
+                DELETE FROM aviamento WHERE id_aviamento = :id_aviamento
+            ");
+
+            $stmt->bindParam(':id_aviamento', $this->id_aviamento);
+
+            $ok = $stmt->execute();
+            $banco->fecharConexao();
+            return $ok;
+
+        } catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
         function getIdAviamento(){
             return $this->id_aviamento;
         }

@@ -42,6 +42,43 @@
             }
         }
 
+        function editar(){
+            $banco = new Banco();
+            $conn = $banco->conectar();
+            try{
+                $stmt = $conn->prepare("update tecido set nome=:nome, cor=:cor, peso_metros=:peso_metros, 
+                composicao=:composicao, gramatura=:gramatura, 
+                fabricante=:fabricante where id_tecido=:id_tecido");
+
+                $stmt->bindParam(':nome',$this->nome);
+                $stmt->bindParam(':cor',$this->cor);
+                $stmt->bindParam(':peso_metros',$this->peso_metros);
+                $stmt->bindParam(':composicao',$this->composicao);
+                $stmt->bindParam(':gramatura',$this->gramatura);
+                $stmt->bindParam(':fabricante',$this->fabricante);
+                $stmt->bindParam(':id_tecido',$this->id_tecido);
+            //  $stmt->bindParam(':tecido',$this->tecido);
+                $stmt->execute();
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
+            $banco->fecharConexao();
+        }
+
+
+        function excluir(){
+            $banco = new Banco();
+            $conn = $banco->conectar();
+            try{
+                $stmt = $conn->prepare("delete from tecido where id_tecido = :id_tecido");
+                $stmt->bindParam(':id_tecido',$this->id_tecido);
+                $stmt->execute();
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
+            $banco->fecharConexao();
+        }
+
         function getIdTecido(){
             return $this->id_tecido;
         }

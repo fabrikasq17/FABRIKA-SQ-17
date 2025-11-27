@@ -7,6 +7,15 @@
         if($tipo === 'cad_modelagem'){
             cadastrarModelagem();
         }
+
+        if ($tipo === 'editar') {
+            editarModelagem();
+        }
+
+        if ($tipo === 'excluir') {
+            excluirModelagem();
+        }
+
     }
 
 
@@ -29,9 +38,68 @@
             $_SESSION['erro'] = "Erro ao cadastrar modelagem!";
         }
 
-        header('Location: ../../FRONT/HTML/cadastro-modelagens.php');
+        header('Location: ../../FRONT/HTML/modelagens.php');
         exit(); // IMPORTANTE: Para o script após redirecionar
 
+    }
+
+
+    function editarModelagem(){
+        session_start();
+
+        // obrigar id_Modelagem existir
+        if (!isset($_POST['id_modelagem']) || empty($_POST['id_modelagem'])) {
+            $_SESSION['erro'] = "ID do modelagem ausente!";
+            header("Location: ../../FRONT/HTML/modelagem.php");
+            exit();
+        }
+
+        $modelagem = Modelagem::carregar($_POST['id_modelagem']);
+        if (!$modelagem) {
+            $_SESSION['erro'] = "Modelagem não encontrado!";
+            header("Location: ../../FRONT/HTML/modelagem.php");
+            exit();
+        }
+
+        // atualizar propriedades
+        $modelagem->tipo_molde = $_POST['tipo_molde'];
+        $modelagem->codigo_molde = $_POST['codigo_molde'];
+        $modelagem->tamanho = $_POST['tamanho'];
+
+        $ok = $modelagem->editar();
+
+        if ($ok) {
+            $_SESSION['mensagem'] = "Modelagem atualizado com sucesso!";
+        } else {
+            $_SESSION['erro'] = "Erro ao atualizar modelagem!";
+        }
+
+        header("Location: ../../FRONT/HTML/modelagem.php");
+        exit();
+    }
+
+
+    function excluirModelagem() {
+        session_start();
+
+        if (!isset($_POST['id_modelagem']) || empty($_POST['id_modelagem'])) {
+            $_SESSION['erro'] = "ID da modelagem não informado!";
+            header("Location: ../../FRONT/HTML/modelagem.php");
+            exit();
+        }
+
+        $modelagem = Modelagem::carregar($_POST['id_modelagem']);
+        if (!$modelagem) {
+            $_SESSION['erro'] = "Modelagem não encontrada!";
+            header("Location: ../../FRONT/HTML/modelagem.php");
+            exit();
+        }
+
+        $modelagem->excluir();
+
+        $_SESSION['mensagem'] = "Modelagem excluída com sucesso!";
+        header("Location: ../../FRONT/HTML/modelagem.php");
+        exit();
     }
 
 

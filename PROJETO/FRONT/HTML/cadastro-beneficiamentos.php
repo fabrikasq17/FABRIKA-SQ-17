@@ -21,39 +21,39 @@
 
     <nav class="menu">
       <h2>Menu principal</h2>
-      <a href="dashboard.html" class="menu-item">
+      <a href="dashboard.php" class="menu-item">
         <i class="bi bi-grid"></i>
         Dashboard
       </a>
-      <a href="pedidos.html" class="menu-item">
+      <a href="pedidos.php" class="menu-item">
         <i class="bi bi-cart3"></i>
         Pedidos
       </a>
 
       <h2>Cadastro</h2>
-      <a href="tecidos.html" class="menu-item active">
+      <a href="tecidos.php" class="menu-item active">
         <i class="bi bi-scissors"></i>
         Tecidos
       </a>
-      <a href="aviamentos.html" class="menu-item">
+      <a href="aviamentos.php" class="menu-item">
         <i class="bi bi-box-seam"></i>
         Aviamentos
       </a>
-      <a href="modelagem.html" class="menu-item">
+      <a href="modelagem.php" class="menu-item">
         <i class="bi bi-grid-3x3-gap"></i>
         Modelagem
       </a>
-      <a href="beneficiamentos.html" class="menu-item">
+      <a href="beneficiamentos.php" class="menu-item">
         <i class="bi bi-brush"></i>
         Beneficiamentos
       </a>
 
-      <a href="configuracoes.html" class="menu-item">
+      <a href="configuracoes.php" class="menu-item">
         <i class="bi bi-gear"></i>
         Configurações
       </a>
 
-      <button class="btn-sair">Sair</button>
+      <button class="btn-sair"><a href="../../BACK/PHP/logout.php">Sair</a></button>
     </nav>
   </aside>
 

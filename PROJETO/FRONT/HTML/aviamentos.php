@@ -25,11 +25,11 @@
   
     <nav class="menu">
       <h2>Menu principal</h2>
-      <a href="dashboard.html" class="menu-item">
+      <a href="dashboard.php" class="menu-item">
         <i class="bi bi-grid"></i>
         Dashboard
       </a>
-      <a href="pedidos.html" class="menu-item">
+      <a href="pedidos.php" class="menu-item">
         <i class="bi bi-cart3"></i>
         Pedidos
       </a>
@@ -52,12 +52,12 @@
         Beneficiamentos
       </a>
 
-      <a href="configuracoes.html" class="menu-item">
+      <a href="configuracoes.php" class="menu-item">
         <i class="bi bi-gear"></i>
         Configurações
       </a>
 
-      <button class="btn-sair">Sair</button>
+      <button class="btn-sair"><a href="../../BACK/PHP/logout.php">Sair</a></button>
     </nav>
   </aside>
 
@@ -92,8 +92,11 @@
             <div class="card-header">
                 <h3><?= htmlspecialchars($aviamento->nome) ?></h3>
                 <span class="codigo">AVI-<?= str_pad($aviamento->getIdAviamento(), 3, '0', STR_PAD_LEFT) ?></span>
-                <button class="menu-btn">⋯</button>
+
+              <button class="menu-btn" onclick="window.location='editar-aviamentos.php?id_aviamento=<?= $aviamento->getIdAviamento() ?>'">⋯</button>
+            
             </div>
+            
 
             <div class="card-body">
 

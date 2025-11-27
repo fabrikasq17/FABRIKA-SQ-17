@@ -1,3 +1,15 @@
+<?php
+  include_once "../../BACK/PHP/BANCO/banco.php";
+  include_once "../../BACK/PHP/tecidoHelper.php";
+
+  $id_tecido = filter_input(
+      INPUT_GET,
+      'id_tecido',
+      FILTER_SANITIZE_NUMBER_INT
+  );
+  $te =  Tecido::carregar($id_tecido);
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -17,7 +29,6 @@
     <!-- 🔗 Biblioteca de ícones Bootstrap -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-  
     <nav class="menu">
       <h2>Menu principal</h2>
       <a href="dashboard.php" class="menu-item">
@@ -52,47 +63,66 @@
         Configurações
       </a>
 
-      <button class="btn-sair"><a href="../../BACK/PHP/logout.php">Sair</a></button>
+      <button class="btn-sair">Sair</button>
     </nav>
   </aside>
 
   <main class="main-content">
     <header class="page-header">
-  <a href="tecidos.html" class="voltar" style="text-decoration:none; color:#111; display:flex; align-items:center; gap:8px;">
+  <a href="tecidos.php" class="voltar" style="text-decoration:none; color:#111; display:flex; align-items:center; gap:8px;">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
       <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
     </svg>
-    <h1 style="font-size:20px; font-weight:600; margin:0;">Cadastro de Tecidos</h1>
+    <h1 style="font-size:20px; font-weight:600; margin:0;">Editar Tecidos</h1>
   </a>
 </header>
 
 
     <section class="form-container">
       <h2>Informações do Tecido</h2>
-      <form name="formCad" method="POST" action="../../BACK/PHP/tecidoHelper.php" onsubmit="alert('Aviamento salvo')">
-        <input type="hidden" name="tipo" value="cad_tecido">
+      <form method="POST" action="../../BACK/PHP/tecidoHelper.php" onsubmit="alert('Tecido salvo')">
+        <input type="hidden" name="tipo" value="edit_tecido">
+        <input type="hidden" name="id_tecido" value="<?= htmlspecialchars($te->getIdTecido()) ?>">
+
         <label>Nome do tecido:</label>
-        <input type="text" placeholder="Ex: Malha 100% Algodão" name="nome">
+        <input type="text" name="nome" value="<?= htmlspecialchars($te->nome) ?>" required>
 
         <label>Cores disponíveis:</label>
-        <input type="text" placeholder="Ex: Branco, Preto, Azul Marinho" name="cor">
+        <input type="text" name="cor" value="<?= htmlspecialchars($te->cor) ?>" required>
 
         <label>Peso/Metros:</label>
-        <input type="text" placeholder="Ex: 500" name="peso_metros">
+        <input type="text" name="peso_metros" value="<?= htmlspecialchars($te->peso_metros) ?>" required>
 
         <label>Composição do tecido:</label>
-        <input type="text" placeholder="Ex: 100% Algodão" name="composicao">
+        <input type="text" name="composicao" value="<?= htmlspecialchars($te->composicao) ?>" required>
 
         <label>Gramatura:</label>
-        <input type="text" placeholder="Ex: 12mm, 14mm, 16mm" name="gramatura">
+        <input type="text" name="gramatura" value="<?= htmlspecialchars($te->gramatura) ?>" required>
 
         <label>Fabricante:</label>
-        <input type="text" placeholder="Ex: Loja" name="fabricante">
+        <input type="text" name="fabricante" value="<?= htmlspecialchars($te->fabricante) ?>" required>
 
         <div style="text-align:center; margin-top:18px;">
           <button class="btn-primary" type="submit">Salvar</button>
         </div>
       </form>
+
+ 
+      <form action="../../BACK/PHP/tecidoHelper.php" 
+            method="POST"
+            onsubmit="return confirm('Tem certeza que deseja excluir este tecido?')"
+            style="margin-top: 15px;">
+
+          <input type="hidden" name="tipo" value="excluir_tecido">
+          <input type="hidden" name="id_tecido" value="<?= $_GET['id_tecido'] ?>">
+
+          <button type="submit" class="btn-danger"
+                  style="background:#c62828; color:white; padding:10px 20px; border:none; border-radius:8px; cursor:pointer;">
+              Excluir
+          </button>
+      </form>
+
+
     </section>
   </main>
 

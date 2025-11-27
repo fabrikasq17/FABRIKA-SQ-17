@@ -25,11 +25,11 @@
 
     <nav class="menu">
       <h2>Menu principal</h2>
-      <a href="dashboard.html" class="menu-item">
+      <a href="dashboard.php" class="menu-item">
         <i class="bi bi-grid"></i>
         Dashboard
       </a>
-      <a href="pedidos.html" class="menu-item">
+      <a href="pedidos.php" class="menu-item">
         <i class="bi bi-cart3"></i>
         Pedidos
       </a>
@@ -57,7 +57,7 @@
         Configurações
       </a>
 
-      <button class="btn-sair">Sair</button>
+      <button class="btn-sair"><a href="../../BACK/PHP/logout.php">Sair</a></button>
     </nav>
   </aside>
      
@@ -67,6 +67,7 @@
         <h1>Tecidos</h1>
          <p> Gerencie o catálogo de tecidos</p>
       </div>
+
       <button class="btn-add"><a href="cadastro-tecido.php">+ Adicionar</a></button>
     </header>
 
@@ -85,7 +86,7 @@
           <div class="card-header">
             <h3><?= htmlspecialchars($t->nome) ?></h3>
             <span class="codigo">ID-<?= $t->getIdTecido() ?></span>
-            <button class="menu-btn">⋯</button>
+            <button class="menu-btn" onclick="window.location='editar-tecido.php?id_tecido=<?= $t->getIdTecido() ?>'">⋯</button>
           </div>
 
           <div class="card-body">

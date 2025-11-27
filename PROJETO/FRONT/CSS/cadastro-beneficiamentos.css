@@ -37,6 +37,17 @@ body { background:#1f1f1f; color:#111; }
     color: #bdbdbd;
 }
 
+.btn-sair a{
+  color: #000000;
+  text-decoration: none;
+}
+
+.btn-sair{
+  color: #000000;
+
+}
+
+
 /* --- SIDEBAR MENU  --- */
 .sidebar {
   display: flex;

@@ -30,6 +30,44 @@
             }
         }
 
+
+        function editar(){
+            $banco = new Banco();
+            $conn = $banco->conectar();
+            try{
+                $stmt = $conn->prepare("update beneficiamento set categoria=:categoria, descricao=:descricao where id_beneficiamento=:id_beneficiamento");
+
+                $stmt->bindParam(':categoria',$this->categoria);
+                $stmt->bindParam(':descricao',$this->descricao);
+
+                $stmt->bindParam(':id_beneficiamento', $this->id_beneficiamento);
+
+
+            //  $stmt->bindParam(':beneficiamento',$this->beneficiamento);
+               // $stmt->execute();
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
+            
+            $banco->fecharConexao();
+            return $stmt->execute();
+        }
+
+
+        function excluir(){
+            $banco = new Banco();
+            $conn = $banco->conectar();
+            try{
+                $stmt = $conn->prepare("delete from beneficiamento where id_beneficiamento = :id_beneficiamento");
+                $stmt->bindParam(':id_beneficiamento',$this->id_beneficiamento);
+                $stmt->execute();
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
+            $banco->fecharConexao();
+        }
+
+
         function getIdBeneficiamento(){
             return $this->id_beneficiamento;
         }

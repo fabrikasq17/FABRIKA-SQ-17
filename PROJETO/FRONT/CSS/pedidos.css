@@ -74,6 +74,16 @@ body { background:#1f1f1f; color:#111; }
   flex: 1;
 }
 
+.btn-sair a{
+  color: #000000;
+  text-decoration: none;
+}
+
+.btn-sair{
+  color: #000000;
+
+}
+
 /* Empurra o penúltimo link (Configurações) para o final */
 
 .sidebar .menu a[href*="configuracoes"] {

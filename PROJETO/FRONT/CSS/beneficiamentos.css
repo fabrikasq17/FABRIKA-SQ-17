@@ -256,6 +256,15 @@ body { background:#1f1f1f; color:#111; }
   border-radius: 20px;
   font-size: 12px;
 }
+.btn-sair a{
+  color: #000000;
+  text-decoration: none;
+}
+
+.btn-sair{
+  color: #000000;
+
+}
 
 .btn-add {
   background: #111;
@@ -275,6 +284,7 @@ body { background:#1f1f1f; color:#111; }
   color: #fff;
   text-decoration: none;
 }
+
 
 .page-header p {
   color: #555;

@@ -54,12 +54,12 @@
         Beneficiamentos
       </a>
 
-      <a href="configuracoes.html" class="menu-item">
+      <a href="configuracoes.php" class="menu-item">
         <i class="bi bi-gear"></i>
         Configurações
       </a>
 
-      <button class="btn-sair">Sair</button>
+      <button class="btn-sair"><a href="../../BACK/PHP/logout.php">Sair</a></button>
     </nav>
   </aside>
 
@@ -94,7 +94,9 @@
                 <div class="card-header">
                     <h3><?= htmlspecialchars($m->tipo_molde) ?></h3>
                     <span class="codigo">MOD-<?= str_pad($m->getIdModelagem(), 3, '0', STR_PAD_LEFT) ?></span>
-                    <button class="menu-btn">⋯</button>
+                    
+                    <button class="menu-btn" onclick="window.location='editar-modelagens.php?id_modelagem=<?= $m->getIdModelagem() ?>'">⋯</button>
+
                 </div>
 
                 <div class="card-body">
